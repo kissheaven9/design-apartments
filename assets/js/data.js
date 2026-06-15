@@ -1,0 +1,156 @@
+/* ============================================================
+   Datenquelle (Demo, ohne Backend) — Design-Apartments in Deutschland
+   Verfügbarkeit/Buchung werden im Frontend simuliert.
+   ============================================================ */
+
+const CITIES = ["Garmisch-Partenkirchen", "Baden-Baden", "Weimar", "Tegernsee", "Berlin", "Berchtesgaden"];
+
+const AMENITY_LABELS = {
+  coffee:   "Premium-Kaffeemaschine",
+  tv:       "Smart-TV",
+  lock:     "Smartes Türschloss",
+  ac:       "Klimaanlage",
+  wifi:     "Highspeed-WLAN",
+  kitchen:  "Voll ausgestattete Küche",
+  washer:   "Waschmaschine",
+  desk:     "Arbeitsplatz",
+  bed:      "Kingsize-Bett",
+  blackout: "Verdunkelungsvorhänge",
+  sound:    "Schallisolierung",
+  linen:    "Premium-Bettwäsche",
+  fireplace:"Kamin",
+  balcony:  "Balkon",
+  view:     "Panoramablick",
+};
+
+const IMG = "assets/img/";
+
+const APARTMENTS = [
+  {
+    id: "gap-01",
+    city: "Garmisch-Partenkirchen",
+    title: "Alpenloft mit Bergpanorama",
+    type: "3-Zimmer-Apartment",
+    size: 86,
+    guests: 5,
+    price: 245,
+    rating: 5.0,
+    images: [IMG + "alpen-1.jpg", IMG + "alpen-2.jpg", IMG + "alpen-3.jpg", IMG + "alpen-4.jpg"],
+    amenities: ["fireplace", "view", "balcony", "tv", "wifi", "kitchen", "lock", "bed", "desk", "linen"],
+    desc: "Großzügiges Apartment mit bodentiefen Fenstern und Panoramablick auf die Bayerischen Alpen. Offener Kamin, gemütliche Bibliothek und ein sonniger Balkon — ideal für eine Auszeit in den Bergen.",
+    booked: [{ from: "2026-07-04", to: "2026-07-12" }, { from: "2026-08-01", to: "2026-08-06" }],
+  },
+  {
+    id: "bad-01",
+    city: "Baden-Baden",
+    title: "Belle-Époque-Suite",
+    type: "2-Zimmer-Luxus-Apartment",
+    size: 72,
+    guests: 4,
+    price: 229,
+    rating: 4.9,
+    images: [IMG + "baden-1.jpg", IMG + "baden-2.jpg", IMG + "baden-3.jpg", IMG + "baden-4.jpg", IMG + "baden-5.jpg"],
+    amenities: ["coffee", "tv", "lock", "ac", "wifi", "kitchen", "washer", "bed", "blackout", "linen"],
+    desc: "Elegantes Luxus-Apartment im Herzen von Baden-Baden. Kristalllüster, edle Samtmöbel und eine offene Designerküche — klassische Eleganz für einen erholsamen Kuraufenthalt.",
+    booked: [{ from: "2026-06-25", to: "2026-06-29" }],
+  },
+  {
+    id: "wei-01",
+    city: "Weimar",
+    title: "Bauhaus-Loft",
+    type: "Studio",
+    size: 38,
+    guests: 2,
+    price: 119,
+    rating: 4.8,
+    images: [IMG + "bauhaus-1.jpg", IMG + "bauhaus-2.jpg", IMG + "bauhaus-3.jpg"],
+    amenities: ["coffee", "tv", "lock", "wifi", "kitchen", "desk", "bed", "linen"],
+    desc: "Puristisches Studio im Bauhaus-Stil mit originalgetreuen Designklassikern, offener Küche und Arbeitsplatz. Klare Linien und Farbakzente in der Stadt des Bauhauses.",
+    booked: [],
+  },
+  {
+    id: "teg-01",
+    city: "Tegernsee",
+    title: "Türkis-Apartment am Tegernsee",
+    type: "2-Zimmer-Ferienwohnung",
+    size: 54,
+    guests: 4,
+    price: 159,
+    rating: 4.9,
+    images: [IMG + "tuerkis-1.jpg", IMG + "tuerkis-2.jpg", IMG + "tuerkis-3.jpg", IMG + "tuerkis-4.jpg", IMG + "tuerkis-5.jpg"],
+    amenities: ["coffee", "tv", "lock", "wifi", "kitchen", "washer", "bed", "balcony", "linen"],
+    desc: "Helle Ferienwohnung mit Alpenflair und Türkis-Akzenten. Gemütliche Wohnküche, große Couch und liebevolle Deko — perfekt für eine Auszeit am Tegernsee.",
+    booked: [{ from: "2026-07-15", to: "2026-07-20" }],
+  },
+  {
+    id: "ber-01",
+    city: "Berlin",
+    title: "Kunst-Loft Berlin-Mitte",
+    type: "3-Zimmer-Design-Apartment",
+    size: 78,
+    guests: 4,
+    price: 189,
+    rating: 4.8,
+    images: [IMG + "berlin-1.jpg", IMG + "berlin-2.jpg", IMG + "berlin-3.jpg", IMG + "berlin-4.jpg"],
+    amenities: ["coffee", "tv", "lock", "ac", "wifi", "kitchen", "washer", "desk", "bed", "sound"],
+    desc: "Ausdrucksstarkes Design-Apartment mit Kunst an jeder Wand, schwarzer Kücheninsel und ruhigem Innenhofblick. Kreatives Wohnen auf Zeit mitten in Berlin.",
+    booked: [{ from: "2026-06-20", to: "2026-06-24" }, { from: "2026-07-10", to: "2026-07-14" }],
+  },
+  {
+    id: "bgd-01",
+    city: "Berchtesgaden",
+    title: "Dark Boutique Suite",
+    type: "Studio-Suite",
+    size: 42,
+    guests: 2,
+    price: 155,
+    rating: 4.9,
+    images: [IMG + "dark-1.jpg", IMG + "dark-2.jpg", IMG + "dark-3.jpg", IMG + "dark-4.jpg"],
+    amenities: ["coffee", "tv", "lock", "wifi", "kitchen", "bed", "blackout", "view", "linen"],
+    desc: "Stilvolle Suite in warmen Dunkeltönen mit Bergmotiven, Kitchenette und gemütlicher Sitzecke. Boutique-Atmosphäre für einen ruhigen Aufenthalt in den Alpen.",
+    booked: [{ from: "2026-08-10", to: "2026-08-15" }],
+  },
+];
+
+/* ---------- Bewertungen (Demo) — unterschiedliche Anzahl je Apartment ---------- */
+const REVIEWS = {
+  "gap-01": [
+    { name: "Lena Marquardt", date: "März 2026", rating: 5, text: "Der Bergblick ist unbeschreiblich! Morgens Kaffee am Fenster mit Panorama — einfach perfekt. Sehr gerne wieder." },
+    { name: "Thomas Keller", date: "Februar 2026", rating: 5, text: "Großzügig, warm und stilvoll. Der Kamin macht das Apartment besonders gemütlich." },
+    { name: "Sophie Brandt", date: "Januar 2026", rating: 5, text: "Ideal für den Familienurlaub in den Bergen. Viel Platz und alles vorhanden." },
+    { name: "Michael Werner", date: "Dezember 2025", rating: 4, text: "Wunderschöne Lage und top ausgestattet. Die Anfahrt im Winter braucht Winterreifen." },
+    { name: "Carolin Busch", date: "November 2025", rating: 5, text: "Eines der schönsten Apartments, die wir je gemietet haben. Der Balkon ist ein Traum." },
+    { name: "Raphael Stein", date: "Oktober 2025", rating: 5, text: "Absolute Ruhe, toller Ausblick, gemütliche Bibliothek. Wir kommen wieder." },
+  ],
+  "bad-01": [
+    { name: "Beatrice Lindner", date: "April 2026", rating: 5, text: "Pure Eleganz. Das Apartment wirkt wie aus einem Magazin — und ist dabei sehr komfortabel." },
+    { name: "Markus Weber", date: "März 2026", rating: 5, text: "Perfekte Lage für einen Kuraufenthalt. Edel eingerichtet, blitzsauber." },
+    { name: "Julia Roth", date: "Februar 2026", rating: 5, text: "Der Kristalllüster und die Samtsofas sind ein Traum. Sehr stilvoll." },
+    { name: "Andreas Pohl", date: "Januar 2026", rating: 4, text: "Sehr schönes, hochwertiges Apartment. Etwas hellhörig, aber insgesamt top." },
+    { name: "Eva Lang", date: "Dezember 2025", rating: 5, text: "Klassische Eleganz mit modernem Komfort. Wir haben uns rundum wohlgefühlt." },
+    { name: "Oliver Frank", date: "November 2025", rating: 5, text: "Großzügig, ruhig und wunderschön. Die Küche lässt keine Wünsche offen." },
+    { name: "Sabine Wolf", date: "Oktober 2025", rating: 4, text: "Tolles Luxus-Apartment, sehr zentral. Gerne wieder in Baden-Baden." },
+  ],
+  "wei-01": [
+    { name: "Florian Kraus", date: "März 2026", rating: 5, text: "Ein Traum für Designliebhaber. Die Bauhaus-Klassiker sind liebevoll ausgewählt." },
+    { name: "Nina Schäfer", date: "Februar 2026", rating: 4, text: "Klein, aber durchdacht. Perfekt für einen Städtetrip nach Weimar." },
+    { name: "Daniel Hoffmann", date: "Dezember 2025", rating: 5, text: "Stilvoll, sauber, ruhig. Der Arbeitsplatz war ideal zum Arbeiten." },
+  ],
+  "teg-01": [
+    { name: "Hanna Groß", date: "April 2026", rating: 5, text: "Gemütlich und hell, mit echtem Alpenflair. Der See ist nur wenige Minuten entfernt." },
+    { name: "Stefan König", date: "März 2026", rating: 5, text: "Perfekte Auszeit am Tegernsee. Die Wohnküche ist sehr gemütlich." },
+    { name: "Marie Thalmann", date: "Februar 2026", rating: 5, text: "Liebevoll eingerichtet, super sauber. Wir kommen definitiv wieder." },
+    { name: "Sven Albrecht", date: "Dezember 2025", rating: 4, text: "Schöne Ferienwohnung mit viel Platz. Toll für einen Kurzurlaub." },
+    { name: "Claudia Fischer", date: "November 2025", rating: 5, text: "Die Türkis-Akzente machen das Apartment besonders. Sehr wohlgefühlt." },
+  ],
+  "ber-01": [
+    { name: "Jonas Richter", date: "April 2026", rating: 5, text: "So viel Kunst und Charakter! Das Loft ist kreativ und trotzdem ruhig zum Innenhof." },
+    { name: "Laura Vogel", date: "März 2026", rating: 5, text: "Mitten in Berlin und doch eine Oase. Die Kücheninsel ist ein Highlight." },
+    { name: "Henrik Voss", date: "Februar 2026", rating: 4, text: "Sehr stylisches Apartment, top Lage. Ideal für ein langes Wochenende." },
+    { name: "Ines Dietrich", date: "Dezember 2025", rating: 5, text: "Einzigartiges Design, viel Platz, super Anbindung. Absolute Empfehlung." },
+  ],
+  "bgd-01": [
+    { name: "Katrin Albers", date: "März 2026", rating: 5, text: "Wunderschöne, dunkle Boutique-Suite. Sehr gemütlich und ruhig — wie ein kleines Hotel." },
+    { name: "Peter Maier", date: "Januar 2026", rating: 4, text: "Stilvoll und sauber, toller Rückzugsort in den Bergen. Gerne wieder." },
+  ],
+};

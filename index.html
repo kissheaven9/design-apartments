@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Apartments — Designer-Apartments mieten in Deutschland</title>
+  <meta name="description" content="Vollständig ausgestattete Designer-Apartments in ganz Deutschland — von den Alpen über Baden-Baden und Weimar bis Berlin. Flexibel buchbar, sofort wohnfertig." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=11" />
+</head>
+<body>
+
+  <!-- ============ Header ============ -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#top" class="brand"><span class="brand__dot"></span>design apartments</a>
+      <nav class="nav" id="nav">
+        <a href="#apartments">Apartments</a>
+        <a href="#vorteile">Vorteile</a>
+        <a href="#stimmen">Stimmen</a>
+        <a href="#standorte">Standorte</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <div class="header__cta">
+        <button class="btn btn--primary btn--sm" data-open-search>Jetzt buchen</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <span class="eyebrow">Designer-Apartments in Deutschland</span>
+          <h1 class="hero__title">Wohnen auf Zeit mit <em>Designanspruch</em>.</h1>
+          <p class="hero__lead">Vollständig ausgestattete Apartments an den schönsten Orten Deutschlands — durchdacht eingerichtet, flexibel buchbar und sofort wohnfertig.</p>
+
+          <form class="searchbar" id="searchForm" novalidate>
+            <div class="searchbar__row">
+              <div class="field">
+                <label for="s-city">Stadt</label>
+                <select id="s-city" name="city">
+                  <option value="">Alle Städte</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="s-in">Anreise</label>
+                <input type="date" id="s-in" name="checkin" />
+              </div>
+              <div class="field">
+                <label for="s-out">Abreise</label>
+                <input type="date" id="s-out" name="checkout" />
+              </div>
+              <div class="field">
+                <label for="s-guests">Gäste</label>
+                <select id="s-guests" name="guests">
+                  <option value="1">1 Gast</option>
+                  <option value="2" selected>2 Gäste</option>
+                  <option value="3">3 Gäste</option>
+                  <option value="4">4 Gäste</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn--primary">Verfügbarkeit prüfen</button>
+            </div>
+          </form>
+
+          <div class="hero__stats">
+            <div class="hero__stat"><div class="n">6</div><div class="l">Apartments</div></div>
+            <div class="hero__stat"><div class="n">6</div><div class="l">Orte in Deutschland</div></div>
+            <div class="hero__stat"><div class="n">4,9★</div><div class="l">Ø Bewertung</div></div>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <img src="assets/img/muenchen-bedroom.jpg" alt="Stilvolles Schlafzimmer mit München-Motiven" />
+          <div class="hero__badge">
+            <span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span>
+            <div><b>Sofort wohnfertig</b><span>Self-Check-in rund um die Uhr</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Promo: direkt buchen & 10% sparen ============ -->
+    <section class="promo-sec">
+      <div class="container">
+        <div class="promo__inner">
+          <div class="promo__badge">−10%</div>
+          <div class="promo__text">
+            <b>Direkt buchen &amp; 10 % sparen</b>
+            <span>Buchen Sie direkt hier auf design apartments — günstiger als über jedes Buchungsportal. Bester Preis garantiert.</span>
+          </div>
+          <button class="btn btn--light" data-open-search>Jetzt 10 % sparen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Über die Apartments ============ -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section__head center">
+          <span class="eyebrow">Über die Apartments</span>
+          <h2>Durchdacht bis ins letzte Detail</h2>
+          <p>Wir haben hunderte Aufenthalte analysiert und daraus Apartments entwickelt, die alles Wichtige mitbringen — und nichts Überflüssiges. Einheitliche Ausstattung, hochwertige Materialien und ein klares Designkonzept in jeder Stadt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Katalog ============ -->
+    <section class="section" id="apartments">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Unsere Apartments</span>
+          <h2>Verfügbare Apartments</h2>
+          <p id="catalogNote">Alle Apartments im Überblick. Nutzen Sie die Suche, um nach Stadt, Datum und Gästezahl zu filtern.</p>
+        </div>
+        <div class="filterbar-wrap" id="catalogControls"><!-- via JS --></div>
+        <div class="cards" id="catalogGrid"><!-- via JS --></div>
+      </div>
+    </section>
+
+    <!-- ============ Was wirklich zählt ============ -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section__head center">
+          <span class="eyebrow">Ausstattung</span>
+          <h2>Was wirklich zählt</h2>
+          <p>In jedem Apartment Standard — damit Sie sich um nichts kümmern müssen.</p>
+        </div>
+        <div class="amenities" id="amenitiesGrid"><!-- via JS --></div>
+      </div>
+    </section>
+
+    <!-- ============ Vorteile ============ -->
+    <section class="section" id="vorteile">
+      <div class="container">
+        <div class="section__head">
+          <span class="eyebrow">Vorteile</span>
+          <h2>Erholung, die man spürt</h2>
+        </div>
+
+        <div class="feature">
+          <div class="feature__media"><img src="assets/img/vorteil-blackout.jpg" alt="Abgedunkeltes Schlafzimmer mit warmem Licht" /></div>
+          <div class="feature__text">
+            <h3>Schlafen wie zu Hause</h3>
+            <p>Jedes Apartment ist auf erholsamen Schlaf ausgelegt — vom Bett bis zur Verdunkelung.</p>
+            <ul class="feature__list">
+              <li><span class="ic" data-icon="check"></span> Kingsize-Bett mit hochwertiger Matratze</li>
+              <li><span class="ic" data-icon="check"></span> Verdunkelungsvorhänge in jedem Schlafbereich</li>
+              <li><span class="ic" data-icon="check"></span> Schallisolierung für ungestörte Nächte</li>
+              <li><span class="ic" data-icon="check"></span> Premium-Bettwäsche aus Baumwolle</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feature feature--rev">
+          <div class="feature__media"><img src="assets/img/life-work.jpg" alt="Person arbeitet entspannt am Laptop im Apartment" /></div>
+          <div class="feature__text">
+            <h3>Bereit zum Einziehen</h3>
+            <p>Ankommen, Tür öffnen, wohlfühlen. Alles ist vorbereitet — zum Arbeiten und zum Leben.</p>
+            <ul class="feature__list">
+              <li><span class="ic" data-icon="check"></span> Highspeed-WLAN & fester Arbeitsplatz</li>
+              <li><span class="ic" data-icon="check"></span> Voll ausgestattete Küche</li>
+              <li><span class="ic" data-icon="check"></span> Smartes Türschloss & Self-Check-in</li>
+              <li><span class="ic" data-icon="check"></span> Wöchentliche Reinigung auf Wunsch</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Stimmen / Bewertungen ============ -->
+    <section class="section" id="stimmen">
+      <div class="container">
+        <div class="section__head center">
+          <span class="eyebrow">Gästestimmen</span>
+          <h2>Das sagen unsere Gäste</h2>
+          <p>Über <b id="voicesTotal">0</b> Bewertungen mit einem Schnitt von <b>4,9 ★</b>. Echte Eindrücke aus unseren Apartments in ganz Deutschland.</p>
+        </div>
+        <div class="voices" id="voicesGrid"><!-- via JS --></div>
+
+        <div class="voice-form-card">
+          <div class="voice-form-card__intro">
+            <h3>Bewertung schreiben</h3>
+            <p>Sie waren bei uns zu Gast? Teilen Sie Ihre Erfahrung. Jede Bewertung wird vor der Veröffentlichung geprüft.</p>
+          </div>
+          <form class="voice-form" id="voiceForm" novalidate>
+            <div class="book__row">
+              <div class="field"><label for="v-name">Name</label><input type="text" id="v-name" name="name" placeholder="Vor- und Nachname"><span class="field__error">Bitte Namen angeben.</span></div>
+              <div class="field"><label for="v-apt">Apartment</label><select id="v-apt" name="apt"><option value="">Allgemein</option></select></div>
+            </div>
+            <div class="field">
+              <label>Ihre Bewertung</label>
+              <div class="star-input" id="vStars" role="radiogroup" aria-label="Bewertung in Sternen">
+                <button type="button" class="star" data-val="1" aria-label="1 Stern">★</button>
+                <button type="button" class="star" data-val="2" aria-label="2 Sterne">★</button>
+                <button type="button" class="star" data-val="3" aria-label="3 Sterne">★</button>
+                <button type="button" class="star" data-val="4" aria-label="4 Sterne">★</button>
+                <button type="button" class="star" data-val="5" aria-label="5 Sterne">★</button>
+              </div>
+              <span class="field__error" id="vStarsErr">Bitte eine Bewertung wählen.</span>
+            </div>
+            <div class="field"><label for="v-text">Ihre Erfahrung</label><textarea id="v-text" name="text" placeholder="Was hat Ihnen gefallen?"></textarea><span class="field__error">Bitte schreiben Sie ein paar Worte.</span></div>
+            <button type="submit" class="btn btn--primary btn--lg">Zur Prüfung senden</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Entwicklungsplan ============ -->
+    <section class="section section--soft" id="standorte">
+      <div class="container">
+        <div class="section__head center">
+          <span class="eyebrow">Entwicklungsplan</span>
+          <h2>Wir wachsen in ganz Deutschland</h2>
+          <p>Bis 2030 erweitern wir unser Netz an Design-Apartments Schritt für Schritt — von heute bis zu über 100 Einheiten.</p>
+        </div>
+        <div class="plan" id="planGrid"><!-- via JS --></div>
+        <div class="plan__cities">
+          <span class="chip">Garmisch-Partenkirchen</span>
+          <span class="chip">Baden-Baden</span>
+          <span class="chip">Weimar</span>
+          <span class="chip">Tegernsee</span>
+          <span class="chip">Berlin</span>
+          <span class="chip">Berchtesgaden</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta">
+          <h2>Bereit für Ihren Aufenthalt?</h2>
+          <p>Finden Sie das passende Apartment und buchen Sie in wenigen Schritten — unkompliziert und flexibel.</p>
+          <button class="btn btn--light btn--lg" data-open-search>Jetzt Apartment finden</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer" id="kontakt">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="#top" class="brand" style="margin-bottom:14px"><span class="brand__dot"></span>design apartments</a>
+          <p style="max-width:34ch">Designer-Apartments zum Wohnen auf Zeit — an den schönsten Orten Deutschlands.</p>
+        </div>
+        <div>
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#apartments">Apartments</a></li>
+            <li><a href="#vorteile">Vorteile</a></li>
+            <li><a href="#standorte">Standorte</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="tel:+498912345678">+49 89 123 456 78</a></li>
+            <li><a href="mailto:hallo@design-apartments.de">hallo@design-apartments.de</a></li>
+            <li><p>Maximilianstraße 1<br>80539 München</p></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="#" data-legal="Impressum">Impressum</a></li>
+            <li><a href="#" data-legal="Datenschutz">Datenschutz</a></li>
+            <li><a href="#" data-legal="AGB">AGB</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 design apartments</span>
+        <span>Demo-Projekt — Portfolio</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ Modal: Detail ============ -->
+  <div class="modal" id="modalDetail" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog">
+      <button class="modal__close" data-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div id="detailContent"><!-- via JS --></div>
+    </div>
+  </div>
+
+  <!-- ============ Modal: Buchung ============ -->
+  <div class="modal" id="modalBook" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookTitle">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog modal__dialog--sm">
+      <button class="modal__close" data-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div id="bookContent"><!-- via JS --></div>
+    </div>
+  </div>
+
+  <!-- ============ Modal: Erfolg ============ -->
+  <div class="modal" id="modalSuccess" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog modal__dialog--sm">
+      <div class="success" id="successContent"><!-- via JS --></div>
+    </div>
+  </div>
+
+  <!-- ============ Modal: Rechtliches ============ -->
+  <div class="modal" id="modalLegal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog modal__dialog--sm">
+      <button class="modal__close" data-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="book__head"><h3 id="legalTitle"></h3></div>
+      <div class="book__form"><p id="legalBody"></p></div>
+    </div>
+  </div>
+
+  <!-- ============ Modal: Bewertungen ============ -->
+  <div class="modal" id="modalReviews" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reviewsTitle">
+    <div class="modal__overlay" data-close></div>
+    <div class="modal__dialog modal__dialog--sm">
+      <button class="modal__close" data-close aria-label="Schließen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div id="reviewsContent"><!-- via JS --></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script src="assets/js/data.js?v=11"></script>
+  <script src="assets/js/app.js?v=11"></script>
+</body>
+</html>
