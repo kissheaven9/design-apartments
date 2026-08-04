@@ -5,13 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Design Apartments — Designer-Apartments mieten in Deutschland</title>
   <meta name="description" content="Vollständig ausgestattete Designer-Apartments in ganz Deutschland — von den Alpen über Baden-Baden und Weimar bis Berlin. Flexibel buchbar, sofort wohnfertig." />
+  <link rel="canonical" href="https://design-apartments.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="design apartments" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="Design Apartments — Designer-Apartments in Deutschland" />
+  <meta property="og:description" content="Vollständig ausgestattete Designer-Apartments in ganz Deutschland — flexibel buchbar, sofort wohnfertig." />
+  <meta property="og:url" content="https://design-apartments.com/" />
+  <meta property="og:image" content="https://design-apartments.com/assets/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Design Apartments — Designer-Apartments in Deutschland" />
+  <meta name="twitter:description" content="Vollständig ausgestattete Designer-Apartments in ganz Deutschland — flexibel buchbar, sofort wohnfertig." />
+  <meta name="twitter:image" content="https://design-apartments.com/assets/img/og-image.jpg" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png?v=1" />
   <link rel="icon" type="image/png" href="assets/img/favicon.png?v=1" />
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png?v=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=11" />
+
+  <!-- Schriften: selbst gehostet (DSGVO-konform, kein externes CDN) -->
+  <link rel="stylesheet" href="assets/css/fonts.css?v=1" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=12" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "design apartments",
+    "url": "https://design-apartments.com/",
+    "logo": "https://design-apartments.com/assets/img/favicon.png",
+    "email": "hallo@design-apartments.de",
+    "telephone": "+49 89 123 456 78",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Maximilianstraße 1",
+      "postalCode": "80539",
+      "addressLocality": "München",
+      "addressCountry": "DE"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "design apartments",
+    "url": "https://design-apartments.com/",
+    "inLanguage": "de-DE"
+  }
+  </script>
 </head>
 <body>
 
@@ -277,8 +326,8 @@
         <div>
           <h4>Rechtliches</h4>
           <ul>
-            <li><a href="#" data-legal="Impressum">Impressum</a></li>
-            <li><a href="#" data-legal="Datenschutz">Datenschutz</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
             <li><a href="#" data-legal="AGB">AGB</a></li>
           </ul>
         </div>
@@ -345,7 +394,7 @@
 
   <div class="toast" id="toast" role="status"></div>
 
-  <script src="assets/js/data.js?v=11"></script>
-  <script src="assets/js/app.js?v=11"></script>
+  <script src="assets/js/data.js?v=12"></script>
+  <script src="assets/js/app.js?v=12"></script>
 </body>
 </html>

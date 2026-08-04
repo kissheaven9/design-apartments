@@ -32,6 +32,8 @@
   const $  = (s, c) => (c || document).querySelector(s);
   const $$ = (s, c) => Array.from((c || document).querySelectorAll(s));
   const euro = (n) => n.toLocaleString("de-DE", { style: "currency", currency: "EUR", minimumFractionDigits: 0 });
+  // HTML-Escaping für alle in innerHTML eingefügten Nutzereingaben (XSS-Schutz)
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const CLEANING_FEE = 45;
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const DOW = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
@@ -405,7 +407,7 @@
     $("#successContent").innerHTML = `
       <div class="success__ic">${I.check.replace('width="20" height="20"', 'width="38" height="38"')}</div>
       <h3>Buchungsanfrage gesendet</h3>
-      <p>Vielen Dank, ${name}! Wir haben Ihre Anfrage für<br><b style="color:var(--ink)">${apt.title}</b> in ${apt.city} erhalten.</p>
+      <p>Vielen Dank, ${esc(name)}! Wir haben Ihre Anfrage für<br><b style="color:var(--ink)">${esc(apt.title)}</b> in ${esc(apt.city)} erhalten.</p>
       <div class="success__ref">Referenz: ${ref}</div>
       <div class="book__summary" style="text-align:left;margin:0 0 22px">
         <div class="line"><span>Zeitraum</span><span>${fmtDate(ci)} – ${fmtDate(co)}</span></div>
@@ -427,11 +429,11 @@
     const list = rv.map((r) => `
       <li class="review">
         <div class="review__top">
-          <span class="review__ava">${initials(r.name)}</span>
-          <div class="review__who"><b>${r.name}</b><span class="review__date">${r.date}</span></div>
+          <span class="review__ava">${esc(initials(r.name))}</span>
+          <div class="review__who"><b>${esc(r.name)}</b><span class="review__date">${esc(r.date)}</span></div>
           <span class="review__stars">${starRow(r.rating)}</span>
         </div>
-        <p>${r.text}</p>
+        <p>${esc(r.text)}</p>
       </li>`).join("");
     $("#reviewsContent").innerHTML = `
       <div class="reviews">
@@ -446,14 +448,14 @@
 
   /* ---------- Gästestimmen-Sektion + Bewertung schreiben ---------- */
   function voiceCard(r, pending) {
-    const where = r.aptTitle ? `${r.aptTitle}, ${r.city}` : "Gast in Bayern";
+    const where = r.aptTitle ? `${esc(r.aptTitle)}, ${esc(r.city)}` : "Gast in Deutschland";
     return `
       <div class="voice reveal">
         <div class="voice__stars">${starRow(r.rating)}</div>
-        <p class="voice__text">„${r.text}“</p>
+        <p class="voice__text">„${esc(r.text)}“</p>
         <div class="voice__foot">
-          <span class="voice__ava">${initials(r.name)}</span>
-          <div class="voice__who"><b>${r.name}</b><span>${where}</span></div>
+          <span class="voice__ava">${esc(initials(r.name))}</span>
+          <div class="voice__who"><b>${esc(r.name)}</b><span>${where}</span></div>
           ${pending ? '<span class="voice__badge">In Prüfung</span>' : ""}
         </div>
       </div>`;
