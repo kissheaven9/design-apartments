@@ -298,6 +298,9 @@ p { color: var(--ink-2); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
+  /* «Designanspruch.» (Unbounded 2.4rem = 382px) war breiter als die Spalte → Grid-Spalte 392px, Stats-Zeile rechts abgeschnitten, horizontales Scrollen */
+  .hero__title { font-size: clamp(1.75rem, 8.6vw, 2.4rem); overflow-wrap: anywhere; }
+  .hero__stats { gap: 16px 20px; }
   .nav, .header__cta .btn--secondary { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav.is-open { display: flex; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; background: #fff; border-bottom: 1px solid var(--line); padding: 8px var(--pad-x) 16px; box-shadow: var(--shadow); }
@@ -312,6 +315,11 @@ p { color: var(--ink-2); }
   .footer__grid { grid-template-columns: 1fr 1fr; }
   /* Badge nicht über das Bild legen — als eigener Block darunter */
   .hero__badge { position: static; left: auto; bottom: auto; margin: 14px 0 0; max-width: none; width: fit-content; }
+}
+@media (max-width: 400px) {
+  /* Header: Brand + «Jetzt buchen» + Burger passten nicht in 360px (Überlauf 24px) → Button nur im Hero, im Header bleibt der Burger */
+  .header__inner { gap: 12px; }
+  .header__cta .btn--primary { display: none; }
 }
 @media (max-width: 520px) {
   .cards, .amenities, .plan, .footer__grid { grid-template-columns: 1fr; }
