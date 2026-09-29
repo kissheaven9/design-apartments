@@ -38,6 +38,27 @@
   const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const DOW = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
+  /* ---------- Bewertungen: Schnitt und Anzahl IMMER aus REVIEWS berechnet (eine Quelle, kein Hardcode) ---------- */
+  const fmtRating = (n) => n.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const plural = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+  function ratingOf(id) {
+    const rs = REVIEWS[id] || [];
+    const count = rs.length;
+    const avg = count ? rs.reduce((s, r) => s + r.rating, 0) / count : 0;
+    return { count, avg: Math.round(avg * 10) / 10 };
+  }
+  function ratingAll() {
+    let s = 0, n = 0;
+    APARTMENTS.forEach((a) => (REVIEWS[a.id] || []).forEach((r) => { s += r.rating; n++; }));
+    return { count: n, avg: n ? Math.round((s / n) * 10) / 10 : 0 };
+  }
+  // Label für Karte/Detail: ohne Bewertungen kein Fake-Schnitt, sondern „Neu“
+  function ratingLabel(id, long) {
+    const r = ratingOf(id);
+    if (!r.count) return `${I.star} Neu <span class="cnt">${long ? "· noch keine Bewertungen" : "(0)"}</span>`;
+    return `${I.star} ${fmtRating(r.avg)} <span class="cnt">${long ? "· " + plural(r.count, "Bewertung", "Bewertungen") : `(${r.count})`}</span>`;
+  }
+
   /* ---------- Datum-Helfer ---------- */
   const pad = (n) => String(n).padStart(2, "0");
   const toISO = (d) => d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
@@ -100,7 +121,7 @@
             <span>${apt.type}</span>
             <span>${I.size} ${apt.size} m²</span>
             <span>${I.users} bis ${apt.guests}</span>
-            <button class="rating-btn" type="button" data-reviews="${apt.id}">${I.star} ${apt.rating.toLocaleString("de-DE")} <span class="cnt">(${(REVIEWS[apt.id] || []).length})</span></button>
+            <button class="rating-btn" type="button" data-reviews="${apt.id}">${ratingLabel(apt.id, false)}</button>
           </div>
           <div class="card__actions">
             <button class="btn btn--secondary btn--sm" data-detail="${apt.id}">Details</button>
@@ -284,7 +305,7 @@
           <span>${apt.type}</span>
           <span>${I.size} ${apt.size} m²</span>
           <span>${I.users} bis ${apt.guests} Gäste</span>
-          <button class="rating-btn" type="button" data-reviews="${apt.id}">${I.star} ${apt.rating.toLocaleString("de-DE")} <span class="cnt">· ${(REVIEWS[apt.id] || []).length} Bewertungen</span></button>
+          <button class="rating-btn" type="button" data-reviews="${apt.id}">${ratingLabel(apt.id, true)}</button>
         </div>
         <p>${apt.desc}</p>
         <h4 style="font-family:var(--font-display);font-weight:500;margin:22px 0 6px">Ausstattung</h4>
@@ -438,8 +459,8 @@
     $("#reviewsContent").innerHTML = `
       <div class="reviews">
         <div class="reviews__head">
-          <div class="reviews__score">${apt.rating.toLocaleString("de-DE")}<span>★</span></div>
-          <div><b id="reviewsTitle">Bewertungen</b><span class="sub">${rv.length} Bewertungen · ${apt.title}, ${apt.city}</span></div>
+          <div class="reviews__score">${rv.length ? fmtRating(ratingOf(id).avg) : "–"}<span>★</span></div>
+          <div><b id="reviewsTitle">Bewertungen</b><span class="sub">${rv.length ? plural(rv.length, "Bewertung", "Bewertungen") : "Noch keine Bewertungen"} · ${apt.title}, ${apt.city}</span></div>
         </div>
         <ul class="reviews__list">${list}</ul>
       </div>`;
@@ -462,9 +483,13 @@
   }
 
   function renderVoices() {
-    let total = 0;
-    APARTMENTS.forEach((a) => { total += (REVIEWS[a.id] || []).length; });
-    $("#voicesTotal").textContent = total;
+    // Zahlen im Hero und in der Sektion aus denselben Daten wie die Karten
+    const all = ratingAll();
+    $("#voicesTotal").textContent = all.count;
+    $("#voicesAvg").textContent = all.count ? fmtRating(all.avg) : "–";
+    $("#heroRating").textContent = all.count ? fmtRating(all.avg) : "–";
+    $("#heroApts").textContent = APARTMENTS.length;
+    $("#heroCities").textContent = new Set(APARTMENTS.map((a) => a.city)).size;
     // je Apartment die erste (aktuellste) Stimme zeigen — Vielfalt über alle Objekte
     const sel = APARTMENTS.map((a) => {
       const rs = REVIEWS[a.id] || [];

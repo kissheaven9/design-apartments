@@ -31,7 +31,7 @@
 
   <!-- Schriften: selbst gehostet (DSGVO-konform, kein externes CDN) -->
   <link rel="stylesheet" href="assets/css/fonts.css?v=1" />
-  <link rel="stylesheet" href="assets/css/styles.css?v=12" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=13" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -124,9 +124,9 @@
           </form>
 
           <div class="hero__stats">
-            <div class="hero__stat"><div class="n">6</div><div class="l">Apartments</div></div>
-            <div class="hero__stat"><div class="n">6</div><div class="l">Orte in Deutschland</div></div>
-            <div class="hero__stat"><div class="n">4,9★</div><div class="l">Ø Bewertung</div></div>
+            <div class="hero__stat"><div class="n" id="heroApts">6</div><div class="l">Apartments</div></div>
+            <div class="hero__stat"><div class="n" id="heroCities">6</div><div class="l">Orte in Deutschland</div></div>
+            <div class="hero__stat"><div class="n"><span id="heroRating">–</span>★</div><div class="l">Ø Bewertung</div></div>
           </div>
         </div>
 
@@ -234,7 +234,7 @@
         <div class="section__head center">
           <span class="eyebrow">Gästestimmen</span>
           <h2>Das sagen unsere Gäste</h2>
-          <p>Über <b id="voicesTotal">0</b> Bewertungen mit einem Schnitt von <b>4,9 ★</b>. Echte Eindrücke aus unseren Apartments in ganz Deutschland.</p>
+          <p><b id="voicesTotal">–</b> Bewertungen mit einem Schnitt von <b><span id="voicesAvg">–</span> ★</b>. Echte Eindrücke aus unseren Apartments in ganz Deutschland.</p>
         </div>
         <div class="voices" id="voicesGrid"><!-- via JS --></div>
 
@@ -394,7 +394,7 @@
 
   <div class="toast" id="toast" role="status"></div>
 
-  <script src="assets/js/data.js?v=12"></script>
-  <script src="assets/js/app.js?v=12"></script>
+  <script src="assets/js/data.js?v=13"></script>
+  <script src="assets/js/app.js?v=13"></script>
 </body>
 </html>
